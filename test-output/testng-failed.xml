@@ -5,9 +5,9 @@
     <classes>
       <class name="MyTests.tests">
         <methods>
+          <include name="checkOutTest"/>
           <include name="AfterFinishedTheTest"/>
           <include name="Setup"/>
-          <include name="Switch_To_Aleart"/>
         </methods>
       </class> <!-- MyTests.tests -->
     </classes>

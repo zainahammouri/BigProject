@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Duration;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -13,7 +14,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -139,6 +142,54 @@ public class tests {
 
 		
 	}
+	@Test(priority = 4)
+	public void AddAllItemsToTheCartInHomePage() {
+		WebElement HomePageBtn = driver.findElement(By.linkText("Home"));
+		HomePageBtn.click();
+		
+		// Known UI issue in Automation Test Store:
+		// "Add to Cart" may redirect to the product details page instead of adding the product directly to the cart.
+//		List<WebElement> addToCartBtn = driver.findElements(By.className("productcart"));
+		
+//		for(int i=0;i<addToCartBtn.size();i++) {
+//			addToCartBtn.get(i).click();
+//		}
+		// Add to Cart is performed from the product details page for reliable automation execution
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		for (int i = 0; i < driver.findElements(By.cssSelector(".thumbnail img")).size(); i++) {
+
+		    List<WebElement> products =
+		            driver.findElements(By.cssSelector(".thumbnail img"));
+
+		    products.get(i).click();
+
+		    WebElement addToCart =
+		            wait.until(ExpectedConditions.elementToBeClickable(
+		                    By.cssSelector(".fa.fa-cart-plus.fa-fw")
+		            ));
+		    addToCart.click();
+
+		    // Wait until cart is updated (no alert, no product_id)
+		    wait.until(ExpectedConditions.visibilityOfElementLocated(
+		            By.cssSelector(".cart_total")
+		    ));
+
+		    driver.navigate().back();
+		    driver.navigate().back();
+		}
+	}
+	@Test(priority = 5)
+	public void checkOutTest() throws InterruptedException {
+		driver.navigate().to("https://automationteststore.com/index.php?rt=checkout/cart");
+		WebElement CheckOutBtn = driver.findElement(By.id("cart_checkout1"));
+		CheckOutBtn.click();
+		WebElement ConfarimOrderBtn = driver.findElement(By.id("checkout_btn"));
+		ConfarimOrderBtn.click();
+		Thread.sleep(2000);
+		Assert.assertEquals(driver.getPageSource().contains("Your Order Has Been Processed!"), true);
+		}
+	
 	@AfterTest
 	public void AfterFinishedTheTest() {}
 
