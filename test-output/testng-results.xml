@@ -2,36 +2,36 @@
 <testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-12-20T14:41:17 EET" name="Default suite" finished-at="2025-12-20T14:42:46 EET" duration-ms="89850">
+  <suite started-at="2025-12-20T17:30:05 EET" name="Default suite" finished-at="2025-12-20T17:31:55 EET" duration-ms="110498">
     <groups>
     </groups>
-    <test started-at="2025-12-20T14:41:17 EET" name="Default test" finished-at="2025-12-20T14:42:46 EET" duration-ms="89850">
+    <test started-at="2025-12-20T17:30:05 EET" name="Default test" finished-at="2025-12-20T17:31:55 EET" duration-ms="110498">
       <class name="MyTests.tests">
-        <test-method is-config="true" signature="Setup()[pri:0, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:41:17 EET" name="Setup" finished-at="2025-12-20T14:41:19 EET" duration-ms="2626" status="PASS">
+        <test-method is-config="true" signature="Setup()[pri:0, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:30:05 EET" name="Setup" finished-at="2025-12-20T17:30:09 EET" duration-ms="3924" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method signature="SignUpTest()[pri:1, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:41:19 EET" name="SignUpTest" finished-at="2025-12-20T14:41:26 EET" duration-ms="6678" status="PASS">
+        <test-method signature="SignUpTest()[pri:1, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:30:09 EET" name="SignUpTest" finished-at="2025-12-20T17:30:27 EET" duration-ms="17693" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- SignUpTest -->
-        <test-method signature="LogOutTest()[pri:2, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:41:26 EET" name="LogOutTest" finished-at="2025-12-20T14:41:27 EET" duration-ms="902" status="PASS">
+        <test-method signature="LogOutTest()[pri:2, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:30:27 EET" name="LogOutTest" finished-at="2025-12-20T17:30:28 EET" duration-ms="957" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LogOutTest -->
-        <test-method signature="LogInTest()[pri:3, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:41:27 EET" name="LogInTest" finished-at="2025-12-20T14:41:28 EET" duration-ms="929" status="PASS">
+        <test-method signature="LogInTest()[pri:3, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:30:28 EET" name="LogInTest" finished-at="2025-12-20T17:30:32 EET" duration-ms="4584" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LogInTest -->
-        <test-method signature="AddAllItemsToTheCartInHomePage()[pri:4, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:41:28 EET" name="AddAllItemsToTheCartInHomePage" finished-at="2025-12-20T14:42:42 EET" duration-ms="73928" status="PASS">
+        <test-method signature="AddAllItemsToTheCartInHomePage()[pri:4, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:30:32 EET" name="AddAllItemsToTheCartInHomePage" finished-at="2025-12-20T17:31:47 EET" duration-ms="74666" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- AddAllItemsToTheCartInHomePage -->
-        <test-method signature="checkOutTest()[pri:5, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:42:42 EET" name="checkOutTest" finished-at="2025-12-20T14:42:46 EET" duration-ms="4733" status="PASS">
+        <test-method signature="checkOutTest()[pri:5, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:31:47 EET" name="checkOutTest" finished-at="2025-12-20T17:31:55 EET" duration-ms="8605" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- checkOutTest -->
-        <test-method is-config="true" signature="AfterFinishedTheTest()[pri:0, instance:MyTests.tests@6b3e12b5]" started-at="2025-12-20T14:42:46 EET" name="AfterFinishedTheTest" finished-at="2025-12-20T14:42:46 EET" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="AfterFinishedTheTest()[pri:0, instance:MyTests.tests@59f63e24]" started-at="2025-12-20T17:31:55 EET" name="AfterFinishedTheTest" finished-at="2025-12-20T17:31:55 EET" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- AfterFinishedTheTest -->

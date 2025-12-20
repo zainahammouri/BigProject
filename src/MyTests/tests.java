@@ -1,5 +1,6 @@
 package MyTests;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,38 +23,21 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class tests {
-	
-	String theWebSite = "https://automationteststore.com/";
-	WebDriver driver =new ChromeDriver();
-	Random rand = new Random();
-	// Establish database connection to fetch required data from the users table for sign-up validation
-	//For DataBase Connection 
-	Connection con;
-	Statement stmt;
-	ResultSet rs; //for Read Query
-	
-	String FirstName, LastName, Email,Address,City,Country,PostlCode;
-	String LogInName;
-	int RandomNumber= rand.nextInt(112345675);
-	String RandomNumberForUserName =Integer.toString(RandomNumber);
-	String password ="Test123!@#%%";
-	boolean expectedResultForSignUpTest = true;
-	boolean expectedResultForLogOutTest = true;
+public class tests extends ParameterClass{
+
 	
 	@BeforeTest
 	public void Setup() throws SQLException {
-		driver.get(theWebSite);
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/classicmodels","root","abc123");
+		TheSetUp();
 	}
 	
 	/**
 	 * @throws SQLException
+	 * @throws InterruptedException 
+	 * @throws IOException 
 	 */
 	@Test(priority = 1)
-	public void SignUpTest() throws SQLException {
+	public void SignUpTest() throws SQLException, IOException, InterruptedException {
 		WebElement logInOrRigesterBtn = driver.findElement(By.linkText("Login or register"));
 		logInOrRigesterBtn.click();
 		WebElement continueBtnToSignUp = driver.findElement(By.xpath("//button[@title='Continue']"));
@@ -76,11 +60,6 @@ public class tests {
 		WebElement PolicyAgreementBtn = driver.findElement(By.xpath("//input[@id='AccountFrm_agree']"));
 		WebElement CountnieBtn = driver.findElement(By.xpath("//button[@title='Continue']"));
 		
-		String [] ArrayOfUsers = {"103","112","114","119","121","124"};
-		int RandomUser = rand.nextInt(ArrayOfUsers.length);
-		String SelectedUser =ArrayOfUsers[RandomUser];
-		
-		String QueryToRead = "select * from customers where customerNumber="+SelectedUser;
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(QueryToRead);
 		
@@ -94,28 +73,34 @@ public class tests {
 			Country = rs.getString("country");
 			PostlCode = rs.getString("postalCode");
 			}
+		
+		//Personal Details
 		firstNameInput.sendKeys(FirstName);
 		lastNameInput.sendKeys(LastName);
 		emailInput.sendKeys(Email);
+		ScrollAndScreenShot(100,"1");
+	
+		
+		//Address Details
 		addressInput.sendKeys(Address);
 		cityInput.sendKeys(City);
-		
 		// UI issue: country must be selected first in order to enable and determine the region
 		Select countrySelect = new Select(country);
 		countrySelect.getFirstSelectedOption().click();
-		
 		Select RegionSelect = new Select (zone);
 		RegionSelect.selectByIndex(3);
-		
 		postcodeInput.sendKeys(PostlCode);
+		ScrollAndScreenShot(600,"2");
 		
+		//LogIn Details
 		LogInName = FirstName+LastName+RandomNumberForUserName;
 		loginNameInput.sendKeys(LogInName);
 		passwordInput.sendKeys(password);
 		confirmPasswordInput.sendKeys(password);
 		PolicyAgreementBtn.click();
-		CountnieBtn.click();
+		ScrollAndScreenShot(1000,"3");
 		
+		CountnieBtn.click();
 		Assert.assertEquals(driver.getPageSource().contains("Welcome back"), expectedResultForSignUpTest);
 		
 		WebElement countinueBtnInWelcomePage = driver.findElement(By.cssSelector(".btn.btn-default.mr10"));
@@ -129,7 +114,7 @@ public class tests {
 	}
 	
 	@Test(priority = 3)
-	public void LogInTest() {
+	public void LogInTest() throws IOException, InterruptedException {
 		driver.navigate().to("https://automationteststore.com/index.php?rt=account/login");
 		WebElement UserNameInput = driver.findElement(By.id("loginFrm_loginname"));
 		WebElement passwordInput = driver.findElement(By.id("loginFrm_password"));
@@ -137,10 +122,9 @@ public class tests {
 		
 		UserNameInput.sendKeys(LogInName);
 		passwordInput.sendKeys(password);
+		
+		ScrollAndScreenShot(200,"4");
 		LoginBtn.click();
-		
-
-		
 	}
 	@Test(priority = 4)
 	public void AddAllItemsToTheCartInHomePage() {
@@ -154,6 +138,8 @@ public class tests {
 //		for(int i=0;i<addToCartBtn.size();i++) {
 //			addToCartBtn.get(i).click();
 //		}
+		
+		
 		// Add to Cart is performed from the product details page for reliable automation execution
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -180,7 +166,7 @@ public class tests {
 		}
 	}
 	@Test(priority = 5)
-	public void checkOutTest() throws InterruptedException {
+	public void checkOutTest() throws InterruptedException, IOException {
 		driver.navigate().to("https://automationteststore.com/index.php?rt=checkout/cart");
 		WebElement CheckOutBtn = driver.findElement(By.id("cart_checkout1"));
 		CheckOutBtn.click();
@@ -188,6 +174,7 @@ public class tests {
 		ConfarimOrderBtn.click();
 		Thread.sleep(2000);
 		Assert.assertEquals(driver.getPageSource().contains("Your Order Has Been Processed!"), true);
+		ScrollAndScreenShot(100,"5");
 		}
 	
 	@AfterTest

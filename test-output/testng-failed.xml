@@ -8,6 +8,7 @@
           <include name="checkOutTest"/>
           <include name="AfterFinishedTheTest"/>
           <include name="Setup"/>
+          <include name="AddAllItemsToTheCartInHomePage"/>
         </methods>
       </class> <!-- MyTests.tests -->
     </classes>
